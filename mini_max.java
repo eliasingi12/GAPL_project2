@@ -57,4 +57,28 @@ public class mini_max {
 	}
 	*/
 
+	/*** Fyrirlestur psudo code ***/
+	/*
+	Value Minimax(state s, . . . .)
+	{
+		terminal(s) eitthvað.. // base case calla á utility function sem skilar einhverju gildi fyrir max-playerinn
+		bestValue = -inf;
+		foreach(action in legalMoves(getRole(), s))
+		{
+			v = MinValue(s, getRole(), a);
+			bestValue = max(v, bestValue);
+		}
+		return bestValue; // þarf líka að “returna” eða halda utanum hvaða move var valið…
+	}
+
+	Value MinValue(state, role, action/move)
+	{
+		bestValue = +inf;
+		foreach(f in “stjatemachine” getJointMoves(state, role, action))
+		{
+			v = Minimax(nextState(state, jm)) // jm returns a list of legal joint moves for all players
+		}
+	}
+	*/
+
 }
