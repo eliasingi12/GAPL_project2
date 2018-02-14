@@ -55,7 +55,7 @@ public class minimaxUnitTests {
 				gd = gd.replaceAll("[\n]+","\n");
 				System.out.println(gd);
 
-				Game g = Game.createEphemeralGame(sb.toString());
+				Game g = Game.createEphemeralGame(gd);
 				List<Gdl> rules = g.getRules();
 				System.out.println(rules);
 				StateMachine s = new ProverStateMachine();
