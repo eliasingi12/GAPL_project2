@@ -7,9 +7,12 @@ import java.io.InputStreamReader;
 
 import org.ggp.base.util.game.Game;
 import org.ggp.base.util.statemachine.MachineState;
+import org.ggp.base.util.statemachine.Move;
 import org.ggp.base.util.statemachine.StateMachine;
 import org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine;
 import org.junit.Test;
+
+import javafx.util.Pair;
 
 public class minimaxUnitTests {
 
@@ -45,8 +48,8 @@ public class minimaxUnitTests {
 				StateMachine s = new ProverStateMachine();
 				MachineState ms = s.getInitialState();
 
-				//Pair<Integer, Move> p = mini_max.Minimax(ms,s.getRoles().get(0));
-				//assert(p.getKey() == scores[i]);
+				Pair<Integer, Move> p = mini_max.Minimax(ms,s.getRoles().get(0));
+				assert(p.getKey() == scores[i]);
 			}
 
 		} catch (IOException e) {
