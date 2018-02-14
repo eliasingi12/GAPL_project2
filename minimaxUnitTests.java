@@ -4,8 +4,10 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 import org.ggp.base.util.game.Game;
+import org.ggp.base.util.gdl.grammar.Gdl;
 import org.ggp.base.util.statemachine.MachineState;
 import org.ggp.base.util.statemachine.Move;
 import org.ggp.base.util.statemachine.StateMachine;
@@ -43,14 +45,23 @@ public class minimaxUnitTests {
 				String strLine = br.readLine();
 				StringBuilder sb = new StringBuilder();
 				while (strLine != null) {
-					sb.append(strLine);
+					if(!strLine.startsWith(";")) {
+						sb.append(strLine).append("\n");
+					}
 					strLine = br.readLine();
 				}
 				br.close();
+				String gd = sb.toString();
+				gd = gd.replaceAll("[\n]+","\n");
+				System.out.println(gd);
 
 				Game g = Game.createEphemeralGame(sb.toString());
+				List<Gdl> rules = g.getRules();
+				System.out.println(rules);
 				StateMachine s = new ProverStateMachine();
+				s.initialize(rules);
 				MachineState ms = s.getInitialState();
+				System.out.println(ms);
 				Pair<Integer, Move> p = mini_max.MaxValue(ms,s.getRoles().get(0), s);
 				assert(p.getKey() == scores[i]);
 			}

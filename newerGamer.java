@@ -1,14 +1,13 @@
 package GAPL_project2;
 
-import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
-
 import org.ggp.base.player.gamer.statemachine.sample.SampleGamer;
 import org.ggp.base.util.statemachine.Move;
 import org.ggp.base.util.statemachine.StateMachine;
 import org.ggp.base.util.statemachine.exceptions.GoalDefinitionException;
 import org.ggp.base.util.statemachine.exceptions.MoveDefinitionException;
 import org.ggp.base.util.statemachine.exceptions.TransitionDefinitionException;
+
+import javafx.util.Pair;
 
 public class newerGamer extends SampleGamer {
 
@@ -17,15 +16,19 @@ public class newerGamer extends SampleGamer {
 			throws TransitionDefinitionException, MoveDefinitionException, GoalDefinitionException {
 
 		StateMachine theMachine = getStateMachine();
+		Pair<Integer, Move> p = mini_max.Minimax(getCurrentState(), getRole());
 
-		List<Move> moves = theMachine.getLegalMoves(getCurrentState(), getRole());
+		return p.getValue();
+	}
 
-		/* we want the new gamer to select a "best" move based on the minimax search
-		 * but not a random move */
-		int numberOfLegalMoves = moves.size();
-		int randomNum = ThreadLocalRandom.current().nextInt(numberOfLegalMoves);
-		Move move = moves.get(randomNum);
+	@Override
+	public void stateMachineMetaGame(long timeout) throws TransitionDefinitionException, MoveDefinitionException, GoalDefinitionException
+    {
+        // TODO: Insert some preprocessing here.
+    }
 
-		return move;
+	@Override
+	public void stateMachineStop() {
+		// TODO: If we want to do something here.
 	}
 }
