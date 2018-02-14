@@ -6,6 +6,8 @@ import org.ggp.base.util.statemachine.MachineState;
 import org.ggp.base.util.statemachine.Move;
 import org.ggp.base.util.statemachine.Role;
 import org.ggp.base.util.statemachine.StateMachine;
+import org.ggp.base.util.statemachine.exceptions.MoveDefinitionException;
+import org.ggp.base.util.statemachine.exceptions.TransitionDefinitionException;
 
 public class mini_max {
 
@@ -64,38 +66,37 @@ public class mini_max {
 	}
 	*/
 
-	/*** Fyrirlestur psudo code ***/
+	/*** Fyrirlestur psudo code
+	 * @throws MoveDefinitionException
+	 * @throws TransitionDefinitionException ***/
 
-	int MaxValue(MachineState state, Role role, StateMachine s)
+	int MaxValue(MachineState state, Role role, StateMachine s) throws MoveDefinitionException, TransitionDefinitionException
 	{
 		int bestValue = Integer.MAX_VALUE;
 
 		if(s.isTerminal(state))
 				return bestValue;
-		for(Move move : s.getLegalMoves(state, role));
+		for(Move move : s.getLegalMoves(state, role))
 		{
-			int childValue = MinValue(s.getNextState(state, s.getLegalMoves(state, role)), role);
+			int childValue = MinValue(s.getNextState(state, s.getLegalMoves(state, role)), role, s, move);
 			bestValue = Math.max(childValue, bestValue);
 		}
 		// we want miniMaxto return a pair<int, move> to get the move as well
 		return bestValue;
 	}
 
-	int MinValue(MachineState state, Role role, StateMachine s)
+	int MinValue(MachineState state, Role role, StateMachine s, Move move) throws MoveDefinitionException, TransitionDefinitionException
 	{
 		int bestValue = Integer.MIN_VALUE;
-		Move move;
 		if(s.isTerminal(state))
 			return bestValue;
 
-		for(List<Move> jm : s.getLegalJointMoves(state, role, s.getLegalMoves(state, role)))
+		for(List<Move> jm : s.getLegalJointMoves(state, role, move))
 		{
-			int childValue = MaxValue(s.getNextStates(state, jm)); // jm returns a list of legal joint moves for all players
+			int childValue = MaxValue(s.getNextState(state, jm), role, s);
 			bestValue = Math.min(childValue, bestValue);
 		}
 
 		return bestValue;
 	}
-
-
 }
