@@ -16,8 +16,7 @@ public class newerGamer extends SampleGamer {
 			throws TransitionDefinitionException, MoveDefinitionException, GoalDefinitionException {
 
 		StateMachine theMachine = getStateMachine();
-		Pair<Integer, Move> p = mini_max.Minimax(getCurrentState(), getRole());
-
+		Pair<Integer, Move> p = mini_max.MaxValue(getCurrentState(), getRole(), theMachine);
 		return p.getValue();
 	}
 
