@@ -32,6 +32,9 @@ public class minimaxUnitTests {
 		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 
 		String strLine;
+		// Game class -> Game g =  Game.getEtheme(strLine)
+		// g.getRules()
+		// pass to statemachine as description to get tictactoe initialized
 
 		while ((strLine = br.readLine()) != null)   {
 			// System.out.println (strLine);
@@ -52,77 +55,77 @@ public class minimaxUnitTests {
 		fail("Not yet implemented");
 		ArrayList<Gdl> currentState= new ArrayList<Gdl>();
 
-		GdlTerm[] terms  = new GdlTerm[4]; // Bý til nýtt Gdl gildi stærð 4
+		GdlTerm[] terms  = new GdlTerm[4]; // Bï¿½ til nï¿½tt Gdl gildi stï¿½rï¿½ 4
 		terms[0] = GdlPool.getVariable("cell");
 		terms[1] = GdlPool.getVariable("1");
 		terms[2] = GdlPool.getVariable("1");
 		terms[3] = GdlPool.getVariable("x");
 		currentState.add(GdlPool.getFunction(GdlPool.getConstant("true"), terms));
 
-		GdlTerm[] terms1  = new GdlTerm[4]; // Bý til nýtt Gdl gildi stærð 4
+		GdlTerm[] terms1  = new GdlTerm[4]; // Bï¿½ til nï¿½tt Gdl gildi stï¿½rï¿½ 4
 		terms1[0] = GdlPool.getVariable("cell");
 		terms1[1] = GdlPool.getVariable("1");
 		terms1[2] = GdlPool.getVariable("2");
 		terms1[3] = GdlPool.getVariable("o");
 		currentState.add(GdlPool.getFunction(GdlPool.getConstant("true"), terms1));
 
-		GdlTerm[] terms2  = new GdlTerm[4]; // Bý til nýtt Gdl gildi stærð 4
+		GdlTerm[] terms2  = new GdlTerm[4]; // Bï¿½ til nï¿½tt Gdl gildi stï¿½rï¿½ 4
 		terms2[0] = GdlPool.getVariable("cell");
 		terms2[1] = GdlPool.getVariable("1");
 		terms2[2] = GdlPool.getVariable("3");
 		terms2[3] = GdlPool.getVariable("o");
 		currentState.add(GdlPool.getFunction(GdlPool.getConstant("true"), terms2));
 
-		GdlTerm[] terms3  = new GdlTerm[4]; // Bý til nýtt Gdl gildi stærð 4
+		GdlTerm[] terms3  = new GdlTerm[4]; // Bï¿½ til nï¿½tt Gdl gildi stï¿½rï¿½ 4
 		terms3[0] = GdlPool.getVariable("cell");
 		terms3[1] = GdlPool.getVariable("2");
 		terms3[2] = GdlPool.getVariable("1");
 		terms3[3] = GdlPool.getVariable("b");
 		currentState.add(GdlPool.getFunction(GdlPool.getConstant("true"), terms3));
 
-		GdlTerm[] terms4  = new GdlTerm[4]; // Bý til nýtt Gdl gildi stærð 4
+		GdlTerm[] terms4  = new GdlTerm[4]; // Bï¿½ til nï¿½tt Gdl gildi stï¿½rï¿½ 4
 		terms4[0] = GdlPool.getVariable("cell");
 		terms4[1] = GdlPool.getVariable("2");
 		terms4[2] = GdlPool.getVariable("2");
 		terms4[3] = GdlPool.getVariable("x");
 		currentState.add(GdlPool.getFunction(GdlPool.getConstant("true"), terms4));
 
-		GdlTerm[] terms5  = new GdlTerm[4]; // Bý til nýtt Gdl gildi stærð 4
+		GdlTerm[] terms5  = new GdlTerm[4]; // Bï¿½ til nï¿½tt Gdl gildi stï¿½rï¿½ 4
 		terms5[0] = GdlPool.getVariable("cell");
 		terms5[1] = GdlPool.getVariable("2");
 		terms5[2] = GdlPool.getVariable("3");
 		terms5[3] = GdlPool.getVariable("b");
 		currentState.add(GdlPool.getFunction(GdlPool.getConstant("true"), terms5));
 
-		GdlTerm[] terms6  = new GdlTerm[4]; // Bý til nýtt Gdl gildi stærð 4
+		GdlTerm[] terms6  = new GdlTerm[4]; // Bï¿½ til nï¿½tt Gdl gildi stï¿½rï¿½ 4
 		terms6[0] = GdlPool.getVariable("cell");
 		terms6[1] = GdlPool.getVariable("3");
 		terms6[2] = GdlPool.getVariable("1");
 		terms6[3] = GdlPool.getVariable("b");
 		currentState.add(GdlPool.getFunction(GdlPool.getConstant("true"), terms6));
 
-		GdlTerm[] terms7  = new GdlTerm[4]; // Bý til nýtt Gdl gildi stærð 4
+		GdlTerm[] terms7  = new GdlTerm[4]; // Bï¿½ til nï¿½tt Gdl gildi stï¿½rï¿½ 4
 		terms7[0] = GdlPool.getVariable("cell");
 		terms7[1] = GdlPool.getVariable("3");
 		terms7[2] = GdlPool.getVariable("2");
 		terms7[3] = GdlPool.getVariable("b");
 		currentState.add(GdlPool.getFunction(GdlPool.getConstant("true"), terms7));
 
-		GdlTerm[] terms8  = new GdlTerm[4]; // Bý til nýtt Gdl gildi stærð 4
+		GdlTerm[] terms8  = new GdlTerm[4]; // Bï¿½ til nï¿½tt Gdl gildi stï¿½rï¿½ 4
 		terms8[0] = GdlPool.getVariable("cell");
 		terms8[1] = GdlPool.getVariable("3");
 		terms8[2] = GdlPool.getVariable("3");
 		terms8[3] = GdlPool.getVariable("b");
 		currentState.add(GdlPool.getFunction(GdlPool.getConstant("true"), terms8));
 
-		GdlTerm[] terms9  = new GdlTerm[2]; // Bý til nýtt Gdl gildi stærð 2
+		GdlTerm[] terms9  = new GdlTerm[2]; // Bï¿½ til nï¿½tt Gdl gildi stï¿½rï¿½ 2
 		terms9[0] = GdlPool.getVariable("control");
 		terms9[1] = GdlPool.getVariable("xplayer");
 		currentState.add(GdlPool.getFunction(GdlPool.getConstant("true"), terms9));
 
 		// actionMove = // getLegalMove(s);
 		// unitTest = mini_max.Minimax(s,role,actionMove);
-		assert(unitTest, mark(3,3));
+		// assert(unitTest, mark(3,3));
 
 	}
 
