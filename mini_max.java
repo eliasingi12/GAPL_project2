@@ -1,5 +1,12 @@
 package GAPL_project2;
 
+import java.util.List;
+
+import org.ggp.base.util.statemachine.MachineState;
+import org.ggp.base.util.statemachine.Move;
+import org.ggp.base.util.statemachine.Role;
+import org.ggp.base.util.statemachine.StateMachine;
+
 public class mini_max {
 
 	/******* Project description *******/
@@ -58,27 +65,37 @@ public class mini_max {
 	*/
 
 	/*** Fyrirlestur psudo code ***/
-	/*
-	Value Minimax(state s, . . . .)
+
+	int MaxValue(MachineState state, Role role, StateMachine s)
 	{
-		terminal(s) eitthvað.. // base case calla á utility function sem skilar einhverju gildi fyrir max-playerinn
-		bestValue = -inf;
-		foreach(action in legalMoves(getRole(), s))
+		int bestValue = Integer.MAX_VALUE;
+
+		if(s.isTerminal(state))
+				return bestValue;
+		for(Move move : s.getLegalMoves(state, role));
 		{
-			v = MinValue(s, getRole(), a);
-			bestValue = max(v, bestValue);
+			int childValue = MinValue(s.getNextState(state, s.getLegalMoves(state, role)), role);
+			bestValue = Math.max(childValue, bestValue);
 		}
-		return bestValue; // þarf líka að “returna” eða halda utanum hvaða move var valið…
+		// we want miniMaxto return a pair<int, move> to get the move as well
+		return bestValue;
 	}
 
-	Value MinValue(state, role, action/move)
+	int MinValue(MachineState state, Role role, StateMachine s)
 	{
-		bestValue = +inf;
-		foreach(f in “stjatemachine” getJointMoves(state, role, action))
+		int bestValue = Integer.MIN_VALUE;
+		Move move;
+		if(s.isTerminal(state))
+			return bestValue;
+
+		for(List<Move> jm : s.getLegalJointMoves(state, role, s.getLegalMoves(state, role)))
 		{
-			v = Minimax(nextState(state, jm)) // jm returns a list of legal joint moves for all players
+			int childValue = MaxValue(s.getNextStates(state, jm)); // jm returns a list of legal joint moves for all players
+			bestValue = Math.min(childValue, bestValue);
 		}
+
+		return bestValue;
 	}
-	*/
+
 
 }
