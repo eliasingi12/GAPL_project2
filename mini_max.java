@@ -9,6 +9,9 @@ import org.ggp.base.util.statemachine.StateMachine;
 import org.ggp.base.util.statemachine.exceptions.MoveDefinitionException;
 import org.ggp.base.util.statemachine.exceptions.TransitionDefinitionException;
 
+import javafx.util.Pair;
+
+
 public class mini_max {
 
 	/******* Project description *******/
@@ -70,22 +73,26 @@ public class mini_max {
 	 * @throws MoveDefinitionException
 	 * @throws TransitionDefinitionException ***/
 
-	int MaxValue(MachineState state, Role role, StateMachine s) throws MoveDefinitionException, TransitionDefinitionException
+	public static Pair<Integer, Move> MaxValue(MachineState state, Role role, StateMachine s) throws MoveDefinitionException, TransitionDefinitionException
 	{
 		int bestValue = Integer.MAX_VALUE;
 
 		if(s.isTerminal(state))
-				return bestValue;
+			return new Pair<>(bestValue, null);
+
+		Move returnMove = null;
 		for(Move move : s.getLegalMoves(state, role))
 		{
 			int childValue = MinValue(s.getNextState(state, s.getLegalMoves(state, role)), role, s, move);
 			bestValue = Math.max(childValue, bestValue);
+			returnMove = move;
 		}
+
 		// we want miniMaxto return a pair<int, move> to get the move as well
-		return bestValue;
+		return new Pair<>(bestValue, returnMove);
 	}
 
-	int MinValue(MachineState state, Role role, StateMachine s, Move move) throws MoveDefinitionException, TransitionDefinitionException
+	public static int MinValue(MachineState state, Role role, StateMachine s, Move move) throws MoveDefinitionException, TransitionDefinitionException
 	{
 		int bestValue = Integer.MIN_VALUE;
 		if(s.isTerminal(state))
@@ -93,8 +100,8 @@ public class mini_max {
 
 		for(List<Move> jm : s.getLegalJointMoves(state, role, move))
 		{
-			int childValue = MaxValue(s.getNextState(state, jm), role, s);
-			bestValue = Math.min(childValue, bestValue);
+			Pair<Integer, Move> PairValue = MaxValue(s.getNextState(state, jm), role, s);
+			bestValue = Math.min((int) PairValue.getKey(), bestValue);
 		}
 
 		return bestValue;

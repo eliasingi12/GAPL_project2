@@ -9,6 +9,8 @@ import org.ggp.base.util.game.Game;
 import org.ggp.base.util.statemachine.MachineState;
 import org.ggp.base.util.statemachine.Move;
 import org.ggp.base.util.statemachine.StateMachine;
+import org.ggp.base.util.statemachine.exceptions.MoveDefinitionException;
+import org.ggp.base.util.statemachine.exceptions.TransitionDefinitionException;
 import org.ggp.base.util.statemachine.implementation.prover.ProverStateMachine;
 import org.junit.Test;
 
@@ -16,7 +18,9 @@ import javafx.util.Pair;
 
 public class minimaxUnitTests {
 
-	/******* Project description *******/
+	/******* Project description
+	 * @throws TransitionDefinitionException
+	 * @throws MoveDefinitionException *******/
 	/* Write down some test cases (e.g., as unit tests) that describe the expected behavior
 	 * before you implement the search. For example, take some small games
 	 * (e.g., http://ggpserver. general-game-playing.de/ggpserver/public/view_game.jsp?name=tictactoe),
@@ -26,7 +30,7 @@ public class minimaxUnitTests {
 	 *  games with and without simultaneous moves, etc.*/
 
 	@Test
-	public void test() {
+	public void test() throws MoveDefinitionException, TransitionDefinitionException {
 
 		try {
 			String prefix = System.getProperty("user.dir") + "/src/main/java/GAPL_project2/";
@@ -47,8 +51,7 @@ public class minimaxUnitTests {
 				Game g = Game.createEphemeralGame(sb.toString());
 				StateMachine s = new ProverStateMachine();
 				MachineState ms = s.getInitialState();
-
-				Pair<Integer, Move> p = mini_max.Minimax(ms,s.getRoles().get(0));
+				Pair<Integer, Move> p = mini_max.MaxValue(ms,s.getRoles().get(0), s);
 				assert(p.getKey() == scores[i]);
 			}
 
