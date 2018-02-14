@@ -75,35 +75,45 @@ public class mini_max {
 
 	public static Pair<Integer, Move> MaxValue(MachineState state, Role role, StateMachine s) throws MoveDefinitionException, TransitionDefinitionException
 	{
-		int bestValue = Integer.MAX_VALUE;
-
+		System.out.println("Entering MaxValue...\n");
+		int bestValue = Integer.MIN_VALUE;
 		if(s.isTerminal(state))
-			return new Pair<>(bestValue, null);
+		{
+			System.out.println("Entering MaxValue terminal state");
+			return new Pair<>(bestValue, null); // evaluation function TODO
+		}
 
 		Move returnMove = null;
 		for(Move move : s.getLegalMoves(state, role))
 		{
+			System.out.println("Entering MaxValue for-loop...\n");
 			int childValue = MinValue(s.getNextState(state, s.getLegalMoves(state, role)), role, s, move);
 			bestValue = Math.max(childValue, bestValue);
 			returnMove = move;
 		}
 
-		// we want miniMaxto return a pair<int, move> to get the move as well
+		System.out.println("Returning in MaxValue \n");
 		return new Pair<>(bestValue, returnMove);
 	}
 
 	public static int MinValue(MachineState state, Role role, StateMachine s, Move move) throws MoveDefinitionException, TransitionDefinitionException
 	{
-		int bestValue = Integer.MIN_VALUE;
+		System.out.println("Entering MinValue...\n");
+		int bestValue = Integer.MAX_VALUE;
 		if(s.isTerminal(state))
-			return bestValue;
+		{
+			System.out.println("Entering MinValue terminal state");
+			return bestValue; // evaluation function TODO
+		}
 
 		for(List<Move> jm : s.getLegalJointMoves(state, role, move))
 		{
+			System.out.println("Entering MaxValue for-loop...\n");
 			Pair<Integer, Move> PairValue = MaxValue(s.getNextState(state, jm), role, s);
 			bestValue = Math.min((int) PairValue.getKey(), bestValue);
 		}
 
+		System.out.println("Returning in MinValue \n");
 		return bestValue;
 	}
 }
